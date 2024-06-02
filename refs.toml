@@ -1,0 +1,39 @@
+[alsz13]
+display = "ALSZ13"
+title = "G. ASHAROV, Y. LINDELL, T. SCHNEIDER, M. ZOHNER. “More Efficient Oblivious Transfer and Extensions for Faster Secure Computation”. In: CCS, 2013."
+
+[bcg19]
+display = "BCG+19"
+title = "E. BOYLE, G. COUTEAU, N. GILBOA, Y, ISHAI, L. KOHL, P. RINDAL, and P. SCHOLL. “Efficient two-round OT extension and silent non-interactive secure computation.” In CCS, 2019."
+
+[gmw]
+display = "GMW87"
+title = "O. GOLDREICH, S. MICALI, A. WIGDERSON. “How to Play any Mental Game or A Completeness Theorem for Protocols with Honest Majority”. In STOC, 1987."
+
+[bea92]
+display = "Bea92"
+title = "D. BEAVER. “Efficient Multiparty Protocols Using Circuit Randomization”. In CRYPTO, 1992."
+
+[aby]
+display = "DSZ15"
+title = "D. DEMMLER, T. SCHNEIDER, M. ZOHNER. “ABY – A Framework for Efficient Mixed-Protocol Secure Two-Party Computation”. In NDSS, 2015."
+
+[astra]
+display = "CCPS19"
+title = "ASTRA: High Throughput 3PC over Rings with Application to Secure Prediction”. In: CCSW@CCS, 2019."
+
+[kel20]
+display = "Kel20"
+title = "M. KELLER. “MP-SPDZ: A Versatile Framework for Multi-Party Computation”. In CCS, 2020."
+
+[aby2]
+display = "PSSY21"
+title = "A. PATRA, T. SCHNEIDER, A. SURESH, H. YALAME. “ABY2.0: Improved Mixed-Protocol Secure Two-Party Computation”. In USENIX Security, 2021."
+
+[motion22]
+display = "BDST22"
+title = "L. BRAUN, D. DEMMLER, T. SCHNEIDER, O. TKACHENKO. “MOTION - A Framework for Mixed-Protocol Multi-Party Computation”. In TOPS, 2022."
+
+[fuse23]
+display = "BHK+23"
+title = "L. BRAUN, M. HUPPERT, N. KHAYATA, T. SCHNEIDER, O. TKACHENKO. “FUSE - Flexible File Format and Intermediate Representation for Secure Multi- Party Computation”. In AsiaCCS 2023."

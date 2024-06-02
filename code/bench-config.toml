@@ -1,0 +1,21 @@
+net_settings = ["RESET", "LAN", "WAN"]
+repeat = 5
+
+[[bench]]
+framework = "SEEC"
+target = "bristol"
+tag = "seec_aes_ctr_no_setup"
+compile_flags = ["../../../circuits/advanced/aes_128.bristol"]
+flags = ["--insecure-setup"]
+cores = [0,1]
+[bench.compile_args]
+"--simd" = ["1", "10", "100", "1000", "10000", "100000", "1000000"]
+
+[[bench]]
+framework = "MOTION"
+tag = "motion_aes_no_setup"
+target = "aes128"
+flags = ["--insecure-setup"]
+cores = [0,1]
+[bench.args]
+"--num-simd" = ["1", "10", "100", "1000", "10000", "100000", "1000000"]

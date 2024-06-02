@@ -1,0 +1,14 @@
+#[sub_circuit]
+fn func(a: Vec<Secret>, b: Vec<Secret>)
+    -> Vec<Secret> {
+  a.into_iter().zip(b).map(|(el_a, el_b)| {
+                  
+    el_a & el_b   
+        
+  }).collect()   
+}
+let (a, b, c, d) = init_data();
+// func is called as normal function.
+let r1 = func(a, b);
+
+let r2 = func(c, d);
