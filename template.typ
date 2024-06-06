@@ -66,7 +66,7 @@
     v(-1em + 3pt)
     let blk-inset = 1.5em
     block(
-      fill: encrypto-blue,
+      // fill: encrypto-blue,
       width: 100%,height: 40%,
       inset: blk-inset,
       {
@@ -78,7 +78,7 @@
             image("logos/encrypto-logo.svg")
           })
         )
-        set text(fill: white)
+        // set text(fill: white)
         
         let rows = if sub-title == none { 2 } else { 3 }
         grid(rows: (auto,) * rows, row-gutter: 0.5em, {
@@ -101,7 +101,7 @@
 #let encrypto-header(title) = {
   encrypto-full-line(stroke: 10pt + encrypto-blue)
   v(-1em + 3pt)
-  block(width: 100%, height: 100%, stroke: (top: black, bottom: black), { 
+  block(width: 100%, height: 100%, { 
     place(
       top + right,dx: 1pt, dy: 5pt,
       block(width: 4cm,inset: 0.2em, image("logos/encrypto-logo.svg"))

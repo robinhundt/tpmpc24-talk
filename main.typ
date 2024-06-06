@@ -67,9 +67,9 @@
 #slide[Feedback][
 #set text(size: 10pt)
 #stack(dir: ltr)[  
-- move future work to appendix
-- slide 3: split this slide into multiple
-- Slide 7: add headline and black bar so its clear that I'm comparing
+// - move future work to appendix
+// - slide 3: split this slide into multiple
+// - Slide 7: add headline and black bar so its clear that I'm comparing
 - don't spend so much time on memory
 - slide 9: don't go into lazy iterator details
 - slide 11: don't use preprocessing, but better compile
@@ -127,48 +127,55 @@ Completely move Future Work slide 19 to backup slides to strengthen our CCS subm
 
 ]
 
+// #slide(notes: ```md
+// - Motivations
+// - Preliminaries, specifically the GMW protocol
+// - The MPC pipeline
+// - our framework SEEC with its support for memory- and round-efficient sub-circuits
+// - benchmarks where we compare against several prior works across multiple axes
+// ```)[Agenda][
+//   #set align(center + horizon)
+//   #set image(height: 3em)
+//   #show regex(`sub_circuit`.text): set text(fill: orange.darken(10%))
+  
+//   #grid(columns: (1fr,) * 5, row-gutter: 0.5em)[
+//     #image("diagrams/memory.svg", height: 3em)
+//   ][
+//     #image("diagrams/notes.svg", height: 3em)
+//   ][
+//     #image("diagrams/graph.svg", height: 3em)
+//   ][
+//     ```rust
+//     #[sub_circuit]
+//     ```
+//   ][
+//     #image("diagrams/bench.svg")
+//   ][
+//     Memory Safety
+//   ][
+//     SEEC
+//   ][
+//     Functions in MPC
+//   ][
+//     Sub-Circuits
+//   ][
+//     Benchmarks
+//   ]
+// ]
+
 #slide(notes: ```md
-- Motivations
-- Preliminaries, specifically the GMW protocol
-- The MPC pipeline
-- our framework SEEC with its support for memory- and round-efficient sub-circuits
-- benchmarks where we compare against several prior works across multiple axes
-```)[Agenda][
-  #set align(center + horizon)
-  #set image(height: 3em)
-  #show regex(`sub_circuit`.text): set text(fill: orange.darken(10%))
-  
-  #grid(columns: (1fr,) * 5, row-gutter: 0.5em)[
-    #image("diagrams/memory.svg", height: 3em)
-  ][
-    #image("diagrams/notes.svg", height: 3em)
-  ][
-    #image("diagrams/graph.svg", height: 3em)
-  ][
-    ```rust
-    #[sub_circuit]
-    ```
-  ][
-    #image("diagrams/bench.svg")
-  ][
-    Memory Safety
-  ][
-    SEEC
-  ][
-    Functions in MPC
-  ][
-    Sub-Circuits
-  ][
-    Benchmarks
-  ]
-]
-
-#slide[Motivation][
-  
-  // - MPC frameworks are networked applications, potentially exposed to the internet
-  // - Good Performance requires low-level control over allocations and memory buffers
-  // - Therefore, efficient frameworks thus far have used C/C++
-
+  - In recent years, Memory Safety of Applications and Programming Languages has received increasing interest. Due to an increasing dependence of our privacy on the security of digital systems, memory safety as one piece of secure systems, is becoming more and more important.
+  - However, experience hash shown time and time again, that high-impact vulnerabilities due to memory unsafety are virtually unavoidable in large projects written in C/C++.
+  - A recent examination of the high severity security impacting bugs in Chromium revealed that 70 % are due to memory unsafety. And, this is corroborated by other large projects, such as Windows and Android.
+  - This is relevant, as MPC applications are networked services, potentially exposed to the Internet, and which are usually written in C/C++. 
+  - The Memory Safety of these applications will becomer more important as MPC progesses from research to real-world deployments.
+  - The reason C/C++ are so often used in MPC, is the performance and efficiency of the resulting implementations.
+  [NEXT SLIDE]
+  - To shift MPC from the largely theoretical to the practical we need to optimize its performance and efficiency
+  - One aspect of efficiency which we've focused on with SEEC, is memory efficiency
+  - This is especially relevant if we want to target mobile devices, where the most common RAM configuration was 4 GB in 2022.
+  - But it's also relevant to deployments on servers, where reduced memory consumption can allow us to tackle larger problems or reduce operating costs 
+```)[Motivation][
 #grid(columns: (1fr, 1fr), gutter: 1em)[
   == Safety
   #set align(center)
@@ -243,7 +250,16 @@ Completely move Future Work slide 19 to backup slides to strengthen our CCS subm
 
 ]
 
-#slide([#underline[S]EEC #underline[E]xecutes #underline[E]normous #underline[C]ircuits (SEEC)])[
+#slide(notes: ```md
+- Okay, so what do we contribute with SEEC?
+- Because we wanted to achieve a memory safe and efficient MPC framework, which also provides good performance and a nice developer experience, the natural choice was Rust as a programming language for us.
+- It's a memory safe language, with performance similar to C/C++, control over memory allocations without garbage collection, and a good developer experience due to fantastic tooling.
+- With SEEC, we provide a high-level embedded domain specific language to contruct circuits, and also the option to use FUSE or Bristol circuits.
+- We provide a memory- and round-efficient implementation of sub-circuits with optional support for MPC level SIMD.
+- And our API supports both function-independent and dependent preprocessing.
+- What I personally really like, is that SEEC is extensibile without a need for forking if you use it as a library to implement your protocol in.
+- And, it is also cross-platform which we test in our continous integration pipeline.
+```)[[#underline[S]EEC #underline[E]xecutes #underline[E]normous #underline[C]ircuits (SEEC)]][
   #set align(left + horizon)
   #set list(marker: none)
   #set stack(dir: ltr, spacing: 1em)
@@ -275,7 +291,11 @@ Completely move Future Work slide 19 to backup slides to strengthen our CCS subm
   ]
 ]
 
-#slide([#underline[S]EEC #underline[E]xecutes #underline[E]normous #underline[C]ircuits (SEEC)])[
+#slide(notes:```md
+- Currently, SEEC is aimed at linear secret sharing based protocols, think GMW, with semi-honest security and two parties. 
+- We plan to extend SEEC to also provide facilities for multiple-parties and maliciously secure protocols.
+- The currently implemented protocols are  GMW
+```[[#underline[S]EEC #underline[E]xecutes #underline[E]normous #underline[C]ircuits (SEEC)]][
   #set align(left + horizon)
   #set list(marker: none)
   #set stack(dir: ltr, spacing: 1em)
@@ -651,6 +671,8 @@ TODO: Maybe animate this slide
 
 - bench sub-circuit via AES CBC circuit
 - bench SIMD via parallel AES and SHA-256 circuits
+
+TODO make clear that we use 2-party semi-hones GMW
 ```)[Evaluation][
   #grid(columns: (40%, 1fr))[
     #grid(rows: (auto, auto), row-gutter: 1em)[
@@ -706,8 +728,8 @@ TODO: Maybe animate this slide
 ]
 
 #let overwrite-legend(content, dx: 0em, dy: 0em) = {
-  set text(size: 0.61em, fill: black.lighten(20%))
-  place(top, dx: 22.5cm + dx, dy: +0.89cm + dy,
+  set text(size: 0.66em, fill: black.lighten(20%))
+  place(top, dx: 22.7cm + dx, dy: +0.83cm + dy,
     box(fill: white, align(start, content)))
 }
 
@@ -716,13 +738,18 @@ TODO: Maybe animate this slide
   place(top, dx: 22.5cm, dy: 5cm, grid(columns: 2, gutter: 0.5em, align: (start + horizon, end), ..content))
 }
 
+#let note(dx: 0%, dy: 0%, content) = {
+  set text(size: 0.9em, fill: black.lighten(20%))
+  place(top, dx: dx, dy: dy, box(fill: white, align(start, content)))
+}
+
 #slide(notes: ```md
 - 50 GB
 - 2.2 GB
 - 375 MB
 ```)[AES-CBC: Reduced Memory via Sub-Circuits][
     #image("plots/aes-cbc-seec-variants-max_heap.svg")
-    #overwrite-legend[
+    #overwrite-legend(dy: 0.3em)[
       SEEC, DL\
       SEEC, DL/SC\
       SEEC, SL/SC\
@@ -737,6 +764,9 @@ TODO: Maybe animate this slide
       Sub-Circuits
     ]
     
+    #note(dx: 70%, dy: 0%)[70 GB]
+    #note(dx: 70%, dy: 20%)[2.2 GB]
+    #note(dx: 70%, dy: 52%)[375 MB]
 ]
 
 #slide(notes:```md
@@ -762,6 +792,11 @@ TODO: Maybe animate this slide
     ][
       Sub-Circuits
     ]
+
+    #note(dx: 37%, dy: 0%)[73 GB]
+    #note(dx: 70%, dy: 0%)[74 GB]
+    #note(dx: 70%, dy: 36%)[375 MB]
+    #note(dx: 70%, dy: 55%)[210 MB]
 ]
 
 #slide(notes: ```md
@@ -788,6 +823,9 @@ TODO: Maybe animate this slide
     ][
       ED:
     ][Early Deallocation]
+
+    #note(dx: 70%, dy: 0%)[7.5 GB]
+    #note(dx: 70%, dy: 40%)[700 MB]
 ]
 
 #slide(notes: ```md
@@ -815,19 +853,41 @@ TODO: Maybe animate this slide
     ][
       ED:
     ][Early Deallocation]
+
+    #note(dx: 70%, dy: 0%)[10 GB]
+    #note(dx: 70%, dy: 40%)[700 MB]
 ]
 
+#let net-note(dx: 0%, dy: 0%, content) = {
+  set text(size: 0.9em, fill: black.lighten(20%))
+  place(top, dx: dx, dy: dy, box(fill: white, align(start, content)))
+}
 
 #slide(notes: ```md
 100 chained AES blocks
 - WAN: MOTION 423 s and MP-SPDZ 616 s
 ```)[AES-CBC Runtime: Effect of Latency][
   #image("plots/aes-cbc-net_comparison.svg")
-  #overwrite-legend(dx: 4.6em)[
+  #overwrite-legend(dx: 3.8em)[
       LAN-0.25ms\
       LAN-1.25ms\
       WAN-100ms
   ]
+  #net-note(dx: 10%, dy: 66%)[1.5]
+  #net-note(dx: 16.5%, dy: 51%)[6]
+  #net-note(dx: 21%, dy: 6%)[313]
+
+  #net-note(dx: 31%, dy: 25%)[62]
+  #net-note(dx: 36.5%, dy: 25%)[64]
+  #net-note(dx: 41%, dy: 3%)[424]
+
+  #net-note(dx: 51%, dy: 77%)[0.6]
+  #net-note(dx: 56.2%, dy: 48%)[8.5]
+  #net-note(dx: 61.5%, dy: 0%)[616]
+
+  #net-note(dx: 71%, dy: 61%)[2.7]
+  #net-note(dx: 76.7%, dy: 51%)[6.8]
+  #net-note(dx: 81.7%, dy: 6%)[305]
 ]
 
 #slide(notes: ```md
